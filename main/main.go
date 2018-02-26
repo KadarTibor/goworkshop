@@ -39,4 +39,14 @@ func main() {
 		panic(err)
 	}
 
+	fmt.Println("The deserialized books are: ")
+	fmt.Println(books)
+
+	serializedData, err := json.Marshal(books)
+	if err != nil{
+		panic(err)
+	}
+
+	fmt.Println("The serialized books are:")
+	fmt.Println(string(serializedData))
 }
