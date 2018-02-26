@@ -33,6 +33,7 @@ func httpHandler(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 		fmt.Fprintln(w, string(serializedBooksData))
+		break
 	default:
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		fmt.Fprintln(w, "Not supported method!")
