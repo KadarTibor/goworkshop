@@ -6,6 +6,7 @@ import (
 	"goworkshop/test"
 	"io/ioutil"
 	"encoding/json"
+	"goworkshop/web"
 )
 
 func main() {
@@ -72,4 +73,6 @@ func main() {
 
 	fmt.Println("The serialized Authors are:")
 	fmt.Println(string(serializedAuthorsData))
+
+	web.StartServer()
 }
