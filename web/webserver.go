@@ -26,28 +26,18 @@ func StartServer() {
 func httpHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	booksFileContent, err := ioutil.ReadFile("model/books.json")
-	if err != nil {
-		panic(err)
+	switch r.Method {
+	case "GET":
+		serializedBooksData, err := json.Marshal(model.Books)
+		if err != nil{
+			panic(err)
+		}
+		fmt.Fprintln(w, string(serializedBooksData))
+	default:
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		fmt.Fprintln(w, "Not supported method!")
 	}
 
-	fmt.Println("here")
-	fmt.Println(string(booksFileContent))
-
-	err = json.Unmarshal(booksFileContent, &model.Books)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println("The deserialized books are: ")
-	serializedBooksData, err := json.Marshal(model.Books)
-	if err != nil{
-		panic(err)
-	}
-
-	fmt.Println("The serialized books are:")
-	fmt.Println(string(serializedBooksData))
-	fmt.Fprintln(w, string(serializedBooksData))
 }
 
 func getPort() string {
