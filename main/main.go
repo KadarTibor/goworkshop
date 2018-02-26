@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"goworkshop/model"
 	"goworkshop/test"
+	"io/ioutil"
+	"encoding/json"
 )
 
 func main() {
@@ -11,6 +13,7 @@ func main() {
 	s.Color = "green"
 	fmt.Println(s.Area())
 	fmt.Println(s)
+
 	var book = model.AuthorDto{
 		UUID:      "1234",
 		FirstName: "Ion",
@@ -20,5 +23,20 @@ func main() {
 	}
 
 	fmt.Println(book)
+
+
+	fileContent, err := ioutil.ReadFile("model/books.json")
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("here")
+	fmt.Println(string(fileContent))
+
+	var books []model.BookDto
+	err = json.Unmarshal(fileContent, &books)
+	if err != nil {
+		panic(err)
+	}
 
 }
