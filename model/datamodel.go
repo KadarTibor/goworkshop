@@ -22,6 +22,8 @@ type BookDto struct {
 	Author      AuthorDto `json:"author"`
 }
 
+type BookList []BookDto
+
 
 func (b BookDto) String() string{
 	return fmt.Sprintf("BookDto{ UUID = %s , Title = %s, NoPages = %d, ReleaseDate = %s, Author = %s}", b.UUID,
@@ -33,5 +35,5 @@ func (a AuthorDto) String() string{
 		a.UUID,a.FirstName, a.LastName, a.Birthday, a.Death)
 }
 
-var authors []AuthorDto
-var books []BookDto
+var Authors []AuthorDto
+var Books []BookDto
