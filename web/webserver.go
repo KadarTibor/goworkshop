@@ -5,7 +5,6 @@ import (
 "os"
 "fmt"
 "goworkshop/model"
-	"io/ioutil"
 	"encoding/json"
 )
 
