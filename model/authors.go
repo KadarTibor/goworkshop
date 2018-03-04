@@ -16,7 +16,7 @@ func (a AuthorDto) String() string {
 		a.UUID, a.FirstName, a.LastName, a.Birthday, a.Death)
 }
 
-func (a *AuthorList) getAuthorByUuid(uuid string) (AuthorDto, error) {
+func (a *AuthorList) GetAuthorByUuid(uuid string) (AuthorDto, error) {
 	err := fmt.Errorf("Could not find any author with that UUID %s", uuid)
 
 	for _, author := range *a {
@@ -28,7 +28,7 @@ func (a *AuthorList) getAuthorByUuid(uuid string) (AuthorDto, error) {
 	return AuthorDto{}, err
 }
 
-func (a *AuthorList) deleteAuthorWithUuid(uuid string) (error) {
+func (a *AuthorList) DeleteAuthorWithUuid(uuid string) (error) {
 	var err = fmt.Errorf("Could not find any author with that uuid %s", uuid)
 	var updatedAuthors AuthorList
 	for _, author := range *a {
@@ -44,7 +44,7 @@ func (a *AuthorList) deleteAuthorWithUuid(uuid string) (error) {
 	return err
 }
 
-func (a *AuthorList) updateAuthorWithUuid(updatedAuthor AuthorDto) (AuthorDto, error) {
+func (a *AuthorList) UpdateAuthorWithUuid(updatedAuthor AuthorDto) (AuthorDto, error) {
 	var err = fmt.Errorf("could not find author by uuid %s", updatedAuthor.UUID)
 	var newAuthors AuthorList
 	for _, author := range *a {
@@ -61,7 +61,7 @@ func (a *AuthorList) updateAuthorWithUuid(updatedAuthor AuthorDto) (AuthorDto, e
 	return updatedAuthor, err
 }
 
-func (a *AuthorList) addAuthor(author AuthorDto) {
+func (a *AuthorList) AddAuthor(author AuthorDto) {
 	*a = append(*a, author)
 }
 

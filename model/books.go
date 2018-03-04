@@ -16,7 +16,7 @@ func (b BookDto) String() string {
 		b.Title, b.NoPages, b.ReleaseDate, b.Author)
 }
 
-func (a *BookList) getBookByUuid(uuid string) (BookDto, error) {
+func (a *BookList) GetBookByUuid(uuid string) (BookDto, error) {
 	err := fmt.Errorf("Could not find any book with that UUID %s", uuid)
 
 	for _, book := range *a {
@@ -28,7 +28,7 @@ func (a *BookList) getBookByUuid(uuid string) (BookDto, error) {
 	return BookDto{}, err
 }
 
-func (b *BookList) deleteBookWithUuid(uuid string) (error) {
+func (b *BookList) DeleteBookWithUuid(uuid string) (error) {
 	var err = fmt.Errorf("Could not find any book with that uuid %s", uuid)
 	var updatedBooks BookList
 	for _, book := range *b {
@@ -44,7 +44,7 @@ func (b *BookList) deleteBookWithUuid(uuid string) (error) {
 	return err
 }
 
-func (b *BookList) updateBookWithUuid(updatedBook BookDto) (BookDto, error) {
+func (b *BookList) UpdateBookWithUuid(updatedBook BookDto) (BookDto, error) {
 	var err = fmt.Errorf("could not find book by uuid %s", updatedBook.UUID)
 	var newBooks BookList
 	for _, book := range *b {
@@ -61,7 +61,7 @@ func (b *BookList) updateBookWithUuid(updatedBook BookDto) (BookDto, error) {
 	return updatedBook, err
 }
 
-func (a *BookList) addBook(book BookDto) {
+func (a *BookList) AddBook(book BookDto) {
 	*a = append(*a, book)
 }
 
