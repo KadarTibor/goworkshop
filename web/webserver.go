@@ -4,8 +4,6 @@ import (
 	"net/http"
 	"os"
 	"fmt"
-	"goworkshop/model"
-	"encoding/json"
 	"github.com/gorilla/mux"
 )
 
@@ -15,7 +13,8 @@ const API_PORT_VALUE = "8000"
 func StartServer() {
 	router := mux.NewRouter()
 	for _, route := range routes {
-		router.HandleFunc(route.Pattern, route.HandlerFunc).Methods(route.Method)
+		handleFunc := log(route.HandlerFunc)
+		router.HandleFunc(route.Pattern, handleFunc).Methods(route.Method)
 	}
 	var port = getPort()
 	fmt.Println("+-------------------------------")
@@ -26,6 +25,14 @@ func StartServer() {
 	}
 }
 
+func log(funcHandler http.HandlerFunc) http.HandlerFunc{
+	fmt.Println("Returning the function")
+	return func (rw http.ResponseWriter, r *http.Request){
+		fmt.Println("New REST request " + r.URL.Path)
+		funcHandler(rw, r)
+		fmt.Println("REST request ended")
+	}
+}
 
 func getPort() string {
 	port := os.Getenv(API_PORT_NAME)
