@@ -13,8 +13,8 @@ const (
 
 func InitDB() (*gorm.DB, error) {
 
-	DBInstance, err := gorm.Open("postgres", "host=localhost port=5432 user=dbadmin " +
-		"password=dbadmin dbname=workshop_db sslmode=disable")
+	DBInstance, err := gorm.Open("postgres", "host=localhost port=5433 user=db_user " +
+		"password=db_password dbname=workshop_db sslmode=disable")
 
 	if err != nil {
 		fmt.Printf("Error while aquiring db connection: %s", err)
