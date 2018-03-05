@@ -12,7 +12,7 @@ const API_PORT_VALUE = "8000"
 
 func StartServer() {
 	router := mux.NewRouter()
-	for _, route := range routes {
+	for _, route := range Routes {
 		handlerFunc := log(route.HandlerFunc)
 		router.HandleFunc(route.Pattern, handlerFunc).Methods(route.Method)
 	}
