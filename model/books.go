@@ -3,20 +3,20 @@ package model
 import "fmt"
 
 //BookDto - Book structure
-type BookDto struct {
+type Book struct {
 	UUID        string    `json:"uuid"`
 	Title       string    `json:"title"`
 	NoPages     int       `json:"noPages"`
 	ReleaseDate string    `json:"releaseDate"`
-	Author      AuthorDto `json:"author"`
+	Author      Author `json:"author"`
 }
 
-func (b BookDto) String() string {
+func (b Book) String() string {
 	return fmt.Sprintf("BookDto{ UUID = %s , Title = %s, NoPages = %d, ReleaseDate = %s, Author = %s}", b.UUID,
 		b.Title, b.NoPages, b.ReleaseDate, b.Author)
 }
 
-func (a *BookList) GetBookByUuid(uuid string) (BookDto, error) {
+func (a *BookList) GetBookByUuid(uuid string) (Book, error) {
 	err := fmt.Errorf("Could not find any book with that UUID %s", uuid)
 
 	for _, book := range *a {
@@ -25,7 +25,7 @@ func (a *BookList) GetBookByUuid(uuid string) (BookDto, error) {
 		}
 	}
 
-	return BookDto{}, err
+	return Book{}, err
 }
 
 func (b *BookList) DeleteBookWithUuid(uuid string) (error) {
@@ -44,7 +44,7 @@ func (b *BookList) DeleteBookWithUuid(uuid string) (error) {
 	return err
 }
 
-func (b *BookList) UpdateBookWithUuid(updatedBook BookDto) (BookDto, error) {
+func (b *BookList) UpdateBookWithUuid(updatedBook Book) (Book, error) {
 	var err = fmt.Errorf("could not find book by uuid %s", updatedBook.UUID)
 	var newBooks BookList
 	for _, book := range *b {
@@ -61,10 +61,10 @@ func (b *BookList) UpdateBookWithUuid(updatedBook BookDto) (BookDto, error) {
 	return updatedBook, err
 }
 
-func (a *BookList) AddBook(book BookDto) {
+func (a *BookList) AddBook(book Book) {
 	*a = append(*a, book)
 }
 
 var Books BookList
 
-type BookList []BookDto
+type BookList []Book

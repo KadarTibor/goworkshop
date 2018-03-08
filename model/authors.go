@@ -3,7 +3,7 @@ package model
 import "fmt"
 
 //AuthorDto - Author structure
-type AuthorDto struct {
+type Author struct {
 	UUID      string `json:"uuid"`
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
@@ -11,12 +11,12 @@ type AuthorDto struct {
 	Death     string `json:"death"`
 }
 
-func (a AuthorDto) String() string {
+func (a Author) String() string {
 	return fmt.Sprintf("AuthorDto{ UUID = %s, FirstName = %s, LastName = %s, Birthday = %s, Death = %s}",
 		a.UUID, a.FirstName, a.LastName, a.Birthday, a.Death)
 }
 
-func (a *AuthorList) GetAuthorByUuid(uuid string) (AuthorDto, error) {
+func (a *AuthorList) GetAuthorByUuid(uuid string) (Author, error) {
 	err := fmt.Errorf("Could not find any author with that UUID %s", uuid)
 
 	for _, author := range *a {
@@ -25,7 +25,7 @@ func (a *AuthorList) GetAuthorByUuid(uuid string) (AuthorDto, error) {
 		}
 	}
 
-	return AuthorDto{}, err
+	return Author{}, err
 }
 
 func (a *AuthorList) DeleteAuthorWithUuid(uuid string) (error) {
@@ -44,7 +44,7 @@ func (a *AuthorList) DeleteAuthorWithUuid(uuid string) (error) {
 	return err
 }
 
-func (a *AuthorList) UpdateAuthorWithUuid(updatedAuthor AuthorDto) (AuthorDto, error) {
+func (a *AuthorList) UpdateAuthorWithUuid(updatedAuthor Author) (Author, error) {
 	var err = fmt.Errorf("could not find author by uuid %s", updatedAuthor.UUID)
 	var newAuthors AuthorList
 	for _, author := range *a {
@@ -61,10 +61,10 @@ func (a *AuthorList) UpdateAuthorWithUuid(updatedAuthor AuthorDto) (AuthorDto, e
 	return updatedAuthor, err
 }
 
-func (a *AuthorList) AddAuthor(author AuthorDto) {
+func (a *AuthorList) AddAuthor(author Author) {
 	*a = append(*a, author)
 }
 
-type AuthorList []AuthorDto
+type AuthorList []Author
 
 var Authors AuthorList

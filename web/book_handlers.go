@@ -15,7 +15,7 @@ func GetAllBooks(w http.ResponseWriter, r *http.Request){
 }
 
 func AddBook(w http.ResponseWriter, r *http.Request) {
-	var book model.BookDto
+	var book model.Book
 	bytes, _ := ioutil.ReadAll(r.Body)
 	err := json.Unmarshal(bytes, book)
 
@@ -54,7 +54,7 @@ func DeleteBookByUUID(w http.ResponseWriter, r *http.Request){
 }
 
 func UpdateBook(w http.ResponseWriter, r *http.Request){
-	var book model.BookDto
+	var book model.Book
 	bytes, _ := ioutil.ReadAll(r.Body)
 	err := json.Unmarshal(bytes, book)
 	if err != nil {
